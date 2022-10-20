@@ -1,6 +1,6 @@
 from scapy.all import IP, sr1, ICMP, ARP, Ether, srp, getmacbyip
 
-for ping in range(5, 7):
+for ping in range(3, 7):
     print("__________________________")
     address = "192.168.121." + str(ping)
     print(str(address))
@@ -12,5 +12,7 @@ for ping in range(5, 7):
     mac = getmacbyip(address)
     print(str(mac))
     res = sr1(IP(dst=address, src='192.168.121.6')/ICMP(), timeout=5)
+
+
 
 # changer les ip, et le for
