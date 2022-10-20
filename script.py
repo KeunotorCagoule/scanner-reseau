@@ -1,6 +1,8 @@
 from scapy.all import IP, sr1, ICMP, ARP, Ether, srp, getmacbyip, TCP, sr
 import random
 
+fichier = open("data.txt", "\n")
+
 for ping in range(3, 7):
     print("__________________________")
     address = "192.168.121." + str(ping)
@@ -19,7 +21,6 @@ for ping in range(3, 7):
 
 # Send SYN with random Src Port for each Dst port
         for dst_port in port_range:
-            print(str(dst_port))
             src_port = random.randint(1025,65534)
             resp = sr1(
             IP(dst=address)/TCP(sport=src_port,dport=dst_port,flags="S"),timeout=1,
