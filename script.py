@@ -1,7 +1,7 @@
 from scapy.all import IP, sr1, ICMP, ARP, Ether, srp, getmacbyip, TCP, sr
 import random
 
-fichier = open("data.txt", "\n")
+#fichier = open("data.txt", "\n")
 
 for ping in range(3, 7):
     print("__________________________")
