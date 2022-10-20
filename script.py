@@ -1,6 +1,6 @@
 from scapy.all import IP, sr1, ICMP, ARP, Ether, srp, getmacbyip
 
-for ping in range(3, 5):
+for ping in range(5, 7):
     print("__________________________")
     address = "192.168.121." + str(ping)
     print(str(address))
