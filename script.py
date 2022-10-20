@@ -22,7 +22,7 @@ for ping in range(3, 7):
             print(str(dst_port))
             src_port = random.randint(1025,65534)
             resp = sr1(
-            IP(dst=address)/TCP(sport=src_port,dport=dst_port,flags="S"),timeout=1,
+            IP(dst=address)/TCP(sport=src_port,dport=dst_port,flags="S"),timeout=5,
             verbose=0,
         )
 
