@@ -19,7 +19,6 @@ for ping in range(3, 7):
         print("Host is up")
         port_range = [22, 23, 80, 443, 3389]
 
-# Send SYN with random Src Port for each Dst port
         for dst_port in port_range:
             src_port = random.randint(1025,65534)
             resp = sr1(
@@ -32,7 +31,6 @@ for ping in range(3, 7):
 
             elif(resp.haslayer(TCP)):
                 if(resp.getlayer(TCP).flags == 0x12):
-                    # Send a gratuitous RST to close the connection
                     send_rst = sr(
                         IP(dst=address)/TCP(sport=src_port,dport=dst_port,flags='R'),
                         timeout=1,
