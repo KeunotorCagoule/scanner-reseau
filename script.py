@@ -1,4 +1,3 @@
-from charset_normalizer import from_bytes
 from scapy.all import IP, sr1, ICMP, ARP, Ether, srp, getmacbyip, TCP, sr
 import random
 import datetime
