@@ -18,7 +18,7 @@ for ping in range(3, 7):
     answered_list = srp(arp_request_broadcast, timeout=1, verbose=False)[0]
     file.write(str(answered_list) + "\n")
     mac = getmacbyip(address)
-    file.write(str(mac))
+    file.write(str("Adresse MAC" + mac))
     res = sr1(IP(dst=address, src='192.168.121.4')/ICMP(), timeout=5)
     #file.write("\n" + str(res, encoding="utf-8"))
     if res: 
