@@ -1,12 +1,16 @@
 from scapy.all import IP, sr1, ICMP, ARP, Ether, srp, getmacbyip, TCP, sr
 import random
 import datetime
+import time
+from tqdm import tqdm
 
 date_time = datetime.datetime.now()
 file_name = "Rapport du {}".format(date_time)
 print(file_name)
 #fichier = open("data.txt", "a")
 
+for i in tqdm(range(100)):
+    time.sleep(0.001)
 
 for ping in range(3, 7):
     print("__________________________")
