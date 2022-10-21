@@ -16,7 +16,7 @@ for ping in range(3, 7):
     broadcast = Ether(dst="ff:ff:ff:ff:ff:ff")
     arp_request_broadcast = broadcast/arp_request
     answered_list = srp(arp_request_broadcast, timeout=1, verbose=False)[0]
-    file.write(str(answered_list))
+    file.write(str(answered_list) + "\n")
     mac = getmacbyip(address)
     file.write(str(mac))
     res = sr1(IP(dst=address, src='192.168.121.4')/ICMP(), timeout=5)
