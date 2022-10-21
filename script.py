@@ -51,6 +51,8 @@ for ping in range(3, 7):
                     int(resp.getlayer(ICMP).code) in [1,2,3,9,10,13]
                 ):
                     file.write(f"\n{address}:{dst_port} is filtered (silently dropped).")
+    else :
+        file.write("\nHost is down")
 
 
 
