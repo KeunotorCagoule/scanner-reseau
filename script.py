@@ -8,7 +8,8 @@ print(file_name)
 file = open("data.txt", "w")
 
 def decode_binary_string(s):
-    return ''.join(chr(int(s[i*8:i*8+8],2)) for i in range(len(s)//8))
+    n = int(s, 2)
+    return n.to_bytes((n.bit_length() + 7) // 8, 'big').decode()
 
 for ping in range(3, 7):
     file.write("\n__________________________\n")
