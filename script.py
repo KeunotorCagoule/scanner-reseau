@@ -9,7 +9,7 @@ file = open("data.txt", "w")
 
 
 def decode_binary_string(s):
-    return bytes(s).decode("utf8")
+    return bytes(s).decode("ascii")
 
 
 for ping in range(3, 7):
