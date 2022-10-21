@@ -24,7 +24,7 @@ for ping in range(3, 7):
     if res: 
         file.write("\nHost is up")
         port_range = [22, 23, 80, 443, 3389]
-        file.write("\nEtats des ports principaux :")
+        file.write("\nEtats des ports principaux :\n")
 
         for dst_port in port_range:
             src_port = random.randint(1025,65534)
@@ -34,7 +34,7 @@ for ping in range(3, 7):
         )
 
             if resp is None:
-                file.write(f"\n{address}:{dst_port} is filtered (silently dropped).")
+                file.write(f"{address}:{dst_port} is filtered (silently dropped).\n")
 
             elif(resp.haslayer(TCP)):
                 if(resp.getlayer(TCP).flags == 0x12):
@@ -43,10 +43,10 @@ for ping in range(3, 7):
                         timeout=1,
                         verbose=0,
                     )
-                    file.write(f"\n{address}:{dst_port} is open.")
+                    file.write(f"{address}:{dst_port} is open.\n")
 
                 elif (resp.getlayer(TCP).flags == 0x14):
-                    file.write(f"\n{address}:{dst_port} is closed.")
+                    file.write(f"{address}:{dst_port} is closed.\n")
 
             elif(resp.haslayer(ICMP)):
                 if(
