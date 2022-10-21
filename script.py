@@ -18,29 +18,31 @@ for ping in range(3, 7):
     answered_list = srp(arp_request_broadcast, timeout=1, verbose=False)[0]
     file.write(str(answered_list) + "\n")
     mac = getmacbyip(address)
-    file.write( "Adresse MAC : " + str(mac))
+    file.write("Adresse MAC : " + str(mac))
     res = sr1(IP(dst=address, src='192.168.121.4')/ICMP(), timeout=5)
-    resFr = bytes(res, 'utf-8'.decode('unicode_escape').encode('latin-1').decode('utf8'))
+    resFr = str(res).decode("utf-8", "strict")
     file.write("\n" + str(res))
-    if res: 
+    if res:
         file.write("\nHost is up")
         port_range = [22, 23, 80, 443, 3389]
         file.write("\nEtats des ports principaux :\n")
 
         for dst_port in port_range:
-            src_port = random.randint(1025,65534)
+            src_port = random.randint(1025, 65534)
             resp = sr1(
-            IP(dst=address)/TCP(sport=src_port,dport=dst_port,flags="S"),timeout=1,
-            verbose=0,
-        )
+                IP(dst=address)/TCP(sport=src_port, dport=dst_port, flags="S"), timeout=1,
+                verbose=0,
+            )
 
             if resp is None:
-                file.write(f"{address}:{dst_port} is filtered (silently dropped).\n")
+                file.write(
+                    f"{address}:{dst_port} is filtered (silently dropped).\n")
 
             elif(resp.haslayer(TCP)):
                 if(resp.getlayer(TCP).flags == 0x12):
                     send_rst = sr(
-                        IP(dst=address)/TCP(sport=src_port,dport=dst_port,flags='R'),
+                        IP(dst=address)/TCP(sport=src_port,
+                                            dport=dst_port, flags='R'),
                         timeout=1,
                         verbose=0,
                     )
@@ -52,15 +54,15 @@ for ping in range(3, 7):
             elif(resp.haslayer(ICMP)):
                 if(
                     int(resp.getlayer(ICMP).type) == 3 and
-                    int(resp.getlayer(ICMP).code) in [1,2,3,9,10,13]
+                    int(resp.getlayer(ICMP).code) in [1, 2, 3, 9, 10, 13]
                 ):
-                    file.write(f"\n{address}:{dst_port} is filtered (silently dropped).")
-    else :
+                    file.write(
+                        f"\n{address}:{dst_port} is filtered (silently dropped).")
+    else:
         file.write("\nHost is down")
 
 
-
-#print(file.read())
+# print(file.read())
 file.close()
 
 # if address == address src ne pas faire l'itération
