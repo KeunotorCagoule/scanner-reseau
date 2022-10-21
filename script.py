@@ -7,9 +7,11 @@ file_name = "Rapport du {}".format(date_time)
 print(file_name)
 file = open("data.txt", "w")
 
+
 def decode_binary_string(s):
-    n = int(s, 2)
+    n = int(str(s), 2)
     return n.to_bytes((n.bit_length() + 7) // 8, 'big').decode()
+
 
 for ping in range(3, 7):
     file.write("\n__________________________\n")
