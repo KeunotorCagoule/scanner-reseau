@@ -7,6 +7,9 @@ file_name = "Rapport du {}".format(date_time)
 print(file_name)
 file = open("data.txt", "w")
 
+def decode_binary_string(s):
+    return ''.join(chr(int(s[i*8:i*8+8],2)) for i in range(len(s)//8))
+
 for ping in range(3, 7):
     file.write("\n__________________________\n")
     address = "192.168.121." + str(ping)
@@ -20,8 +23,9 @@ for ping in range(3, 7):
     mac = getmacbyip(address)
     file.write("Adresse MAC : " + str(mac))
     res = sr1(IP(dst=address, src='192.168.121.4')/ICMP(), timeout=5)
-    resFr = bytes(res).decode('')
-    file.write("\n" + str(res))
+    resFr = decode_binary_string(res)
+    print(resFr)
+    file.write("\n" + str(resFr))
     if res:
         file.write("\nHost is up")
         port_range = [22, 23, 80, 443, 3389]
