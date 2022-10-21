@@ -8,7 +8,7 @@ print(file_name)
 file = open("data.txt", "w")
 
 for ping in range(3, 7):
-    file.write("__________________________")
+    file.write("\n__________________________\n")
     address = "192.168.121." + str(ping)
     file.write(str(address))
     arp_request = ARP(pdst=address)
