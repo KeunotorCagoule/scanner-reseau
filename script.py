@@ -1,3 +1,4 @@
+from charset_normalizer import from_bytes
 from scapy.all import IP, sr1, ICMP, ARP, Ether, srp, getmacbyip, TCP, sr
 import random
 import datetime
@@ -20,7 +21,7 @@ for ping in range(3, 7):
     mac = getmacbyip(address)
     file.write("Adresse MAC : " + str(mac))
     res = sr1(IP(dst=address, src='192.168.121.4')/ICMP(), timeout=5)
-    resFr = res.decode("utf-8", "strict")
+    resFr = bytes(res).decode('utf-8')
     file.write("\n" + str(res))
     if res:
         file.write("\nHost is up")
