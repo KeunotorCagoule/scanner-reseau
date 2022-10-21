@@ -5,7 +5,7 @@ import datetime
 date_time = datetime.datetime.now()
 file_name = "Rapport du {}".format(date_time)
 print(file_name)
-file = open("data.txt", "a")
+file = open("data.txt", "w")
 
 for ping in range(3, 7):
     file.write("__________________________")
@@ -54,7 +54,7 @@ for ping in range(3, 7):
 
 
 
-    print(file.read())
-    file.close()
+print(file.read())
+file.close()
 
 # if address == address src ne pas faire l'itération
