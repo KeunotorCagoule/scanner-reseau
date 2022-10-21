@@ -10,7 +10,7 @@ file = open("data.txt", "w")
 for ping in range(3, 7):
     file.write("\n__________________________\n")
     address = "192.168.121." + str(ping)
-    file.write(str(address))
+    file.write(str(address)+ "\n")
     arp_request = ARP(pdst=address)
     broadcast = Ether(dst="ff:ff:ff:ff:ff:ff")
     arp_request_broadcast = broadcast/arp_request
