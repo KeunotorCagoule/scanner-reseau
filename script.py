@@ -20,6 +20,7 @@ for ping in range(3, 7):
     mac = getmacbyip(address)
     file.write( "Adresse MAC : " + str(mac))
     res = sr1(IP(dst=address, src='192.168.121.4')/ICMP(), timeout=5)
+    resFr = bytes(res, 'utf-8'.decode('unicode_escape').encode('latin-1').decode('utf-8'))
     file.write("\n" + str(res))
     if res: 
         file.write("\nHost is up")
