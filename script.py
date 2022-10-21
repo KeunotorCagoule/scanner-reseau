@@ -10,7 +10,7 @@ file = open("data.txt", "w")
 for ping in range(3, 7):
     file.write("\n__________________________\n")
     address = "192.168.121." + str(ping)
-    file.write(str(address)+ "\n")
+    file.write("Adresse IP : " + str(address) + "\n")
     arp_request = ARP(pdst=address)
     #file.write(str(arp_request)+ "\n")
     broadcast = Ether(dst="ff:ff:ff:ff:ff:ff")
@@ -18,7 +18,7 @@ for ping in range(3, 7):
     answered_list = srp(arp_request_broadcast, timeout=1, verbose=False)[0]
     file.write(str(answered_list) + "\n")
     mac = getmacbyip(address)
-    file.write( "Adresse MAC :" + str(mac))
+    file.write( "Adresse MAC : " + str(mac))
     res = sr1(IP(dst=address, src='192.168.121.4')/ICMP(), timeout=5)
     #file.write("\n" + str(res, encoding="utf-8"))
     if res: 
@@ -31,6 +31,7 @@ for ping in range(3, 7):
             IP(dst=address)/TCP(sport=src_port,dport=dst_port,flags="S"),timeout=1,
             verbose=0,
         )
+            file.write("\nEtats des ports principaux :")
 
             if resp is None:
                 file.write(f"\n{address}:{dst_port} is filtered (silently dropped).")
