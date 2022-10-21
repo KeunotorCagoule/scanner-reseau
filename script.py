@@ -24,6 +24,7 @@ for ping in range(3, 7):
     if res: 
         file.write("\nHost is up")
         port_range = [22, 23, 80, 443, 3389]
+        file.write("\nEtats des ports principaux :")
 
         for dst_port in port_range:
             src_port = random.randint(1025,65534)
@@ -31,7 +32,6 @@ for ping in range(3, 7):
             IP(dst=address)/TCP(sport=src_port,dport=dst_port,flags="S"),timeout=1,
             verbose=0,
         )
-            file.write("\nEtats des ports principaux :")
 
             if resp is None:
                 file.write(f"\n{address}:{dst_port} is filtered (silently dropped).")
