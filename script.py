@@ -17,9 +17,9 @@ for ping in range(3, 7):
     res = sr1(IP(dst=address, src='192.168.121.4')/ICMP(), timeout=5)
     if res: 
         print("Host is up")
-        port_range = [22, 23, 80, 443, 3389]
+        #port_range = [22, 23, 80, 443, 3389]
 
-        for dst_port in port_range:
+        for dst_port in range(1, 1024):
             src_port = random.randint(1025,65534)
             resp = sr1(
             IP(dst=address)/TCP(sport=src_port,dport=dst_port,flags="S"),timeout=1,
@@ -47,8 +47,5 @@ for ping in range(3, 7):
                     int(resp.getlayer(ICMP).code) in [1,2,3,9,10,13]
                 ):
                     print(f"{address}:{dst_port} is filtered (silently dropped).")
-
-
-
 
 # if address == address src ne pas faire l'itération
