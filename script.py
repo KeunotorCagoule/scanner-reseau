@@ -12,13 +12,13 @@ for ping in range(3, 7):
     address = "192.168.121." + str(ping)
     file.write(str(address)+ "\n")
     arp_request = ARP(pdst=address)
-    file.write(str(arp_request)+ "\n")
+    #file.write(str(arp_request)+ "\n")
     broadcast = Ether(dst="ff:ff:ff:ff:ff:ff")
     arp_request_broadcast = broadcast/arp_request
     answered_list = srp(arp_request_broadcast, timeout=1, verbose=False)[0]
     file.write(str(answered_list))
     mac = getmacbyip(address)
-    #file.write(str(mac))
+    file.write(str(mac))
     res = sr1(IP(dst=address, src='192.168.121.4')/ICMP(), timeout=5)
     #file.write("\n" + str(res, encoding="utf-8"))
     if res: 
