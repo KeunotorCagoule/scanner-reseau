@@ -9,7 +9,7 @@ file = open("data.txt", "w")
 
 for ping in range(3, 7):
     file.write("__________________________")
-    address = "192.168.121." + str(ping)
+    address = "\n192.168.121." + str(ping)
     file.write(str(address))
     arp_request = ARP(pdst=address)
     broadcast = Ether(dst="ff:ff:ff:ff:ff:ff")
@@ -20,7 +20,7 @@ for ping in range(3, 7):
     file.write(str(mac))
     res = sr1(IP(dst=address, src='192.168.121.4')/ICMP(), timeout=5)
     if res: 
-        file.write("Host is up")
+        file.write("\nHost is up")
         port_range = [22, 23, 80, 443, 3389]
 
         for dst_port in port_range:
@@ -31,7 +31,7 @@ for ping in range(3, 7):
         )
 
             if resp is None:
-                file.write(f"{address}:{dst_port} is filtered (silently dropped).")
+                file.write(f"\n{address}:{dst_port} is filtered (silently dropped).")
 
             elif(resp.haslayer(TCP)):
                 if(resp.getlayer(TCP).flags == 0x12):
@@ -40,17 +40,17 @@ for ping in range(3, 7):
                         timeout=1,
                         verbose=0,
                     )
-                    file.write(f"{address}:{dst_port} is open.")
+                    file.write(f"\n{address}:{dst_port} is open.")
 
                 elif (resp.getlayer(TCP).flags == 0x14):
-                    file.write(f"{address}:{dst_port} is closed.")
+                    file.write(f"\n{address}:{dst_port} is closed.")
 
             elif(resp.haslayer(ICMP)):
                 if(
                     int(resp.getlayer(ICMP).type) == 3 and
                     int(resp.getlayer(ICMP).code) in [1,2,3,9,10,13]
                 ):
-                    file.write(f"{address}:{dst_port} is filtered (silently dropped).")
+                    file.write(f"\n{address}:{dst_port} is filtered (silently dropped).")
 
 
 
