@@ -1,7 +1,12 @@
 from scapy.all import IP, sr1, ICMP, ARP, Ether, srp, getmacbyip, TCP, sr
 import random
+import datetime
 
-#fichier = open("data.txt", "\n")
+date_time = datetime.datetime.now()
+file_name = "Rapport du {}".format(date_time)
+print(file_name)
+#fichier = open("data.txt", "a")
+
 
 for ping in range(3, 7):
     print("__________________________")
