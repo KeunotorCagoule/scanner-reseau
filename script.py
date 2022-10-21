@@ -19,7 +19,7 @@ for ping in range(3, 7):
     mac = getmacbyip(address)
     file.write(str(mac))
     res = sr1(IP(dst=address, src='192.168.121.4')/ICMP(), timeout=5)
-    file.write("\n" + str(res), encoding="utf-8")
+    file.write("\n" + str(res, encoding="utf-8"))
     if res: 
         file.write("\nHost is up")
         port_range = [22, 23, 80, 443, 3389]
