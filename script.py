@@ -14,7 +14,6 @@ start_address = '192.168.121.'
 input_range = input("Please enter a list of ports to test separated by space :")
 str_range  = input_range.split()
 port_range = [int(i) for i in str_range]
-print(port_range)
 src_address = "192.168.121.4"
 
 for ping in range(3, 7):
@@ -25,7 +24,6 @@ for ping in range(3, 7):
         file.write("\n__________________________\n")
         file.write("Adresse IP : " + address + "\n")
         arp_request = ARP(pdst=address)
-        #file.write(str(arp_request)+ "\n")
         broadcast = Ether(dst="ff:ff:ff:ff:ff:ff")
         arp_request_broadcast = broadcast/arp_request
         answered_list = srp(arp_request_broadcast, timeout=1, verbose=False)[0]
@@ -37,7 +35,6 @@ for ping in range(3, 7):
             file.write("\nHost is up")
             file.write("\nMain port states :\n")
 
-            #port_range = [22, 23, 80, 443, 3389]
             for dst_port in port_range:
                 res = ""
                 src_port = random.randint(1025, 65534)
@@ -66,7 +63,7 @@ for ping in range(3, 7):
                     elif (resp.getlayer(TCP).flags == 0x14):
                         file.write(f"{address}:{dst_port} is closed.\n")
                         res = "closed"
-                        file.write(f"{address}'s OS is Windows")
+                        
 
                 elif(resp.haslayer(ICMP)):
                     if(
@@ -76,9 +73,13 @@ for ping in range(3, 7):
                         file.write(
                             f"\n{address}:{dst_port} is filtered (silently dropped).")
                 elif (dst_port == 22) and (res == "dropped"):
-                    file.write(f"{address}'s is Linux.")
+                    file.write(f"{address}'s is Linux.\n")
+                elif (dst_port == 22) and (res == "closed"):
+                    file.write(f"{address}'s OS is Windows\n")
+                
         else:
             file.write("\nHost is down")
+
 
 
 # print(file.read())
