@@ -18,9 +18,10 @@ src_address = "192.168.121.4"
 
 for ping in range(3, 7):
 
-    file.write("\n__________________________\n")
+    
     address = start_address + str(ping)
     if address != src_address:
+        file.write("\n__________________________\n")
         file.write("Adresse IP : " + address + "\n")
         arp_request = ARP(pdst=address)
         #file.write(str(arp_request)+ "\n")
@@ -38,6 +39,7 @@ for ping in range(3, 7):
             for dst_port in port_range:
                 res = ""
                 src_port = random.randint(1025, 65534)
+                print(address, dst_port, src_port)
                 resp = sr1(
                     IP(dst=address)/TCP(sport=src_port, dport=dst_port, flags="S"), timeout=1,
                     verbose=0,
