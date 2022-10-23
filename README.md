@@ -5,8 +5,8 @@ A chaque éxecution du script, le script fournira un rapport qui sera nommé ave
 Le script ne passera pas sur l'adresse source qui envoie les pings car ils passeront sur une couche au dessus.
 Le Scanner réseau va permettre d'itérer sur toutes les adresses IP du réseau choisi. Il enverra un ping sur toutes les adresses IP pour voir si elles répondent. Si une adresse IP répond le script inscrira dans le rapport si la machine est allumée ou non et ensuite affichera son adresse MAC.
 Ensuite le script regardera sur des ports principaux prédéfinis à l'avance. Il sera inscrit dans le rapport si les ports sont ouverts, fermés ou filtré.
-A partir des réponses des ports. Le script donnera dans le rapport l'OS de l'adresse IP.
-Pour couper le script, il faudra faire un `Ctrl + z`
+Le script donnera dans le rapport l'OS de l'adresse IP.
+Pour couper le script, il faudra faire un `Ctrl + z`.
 
 # Initialisation du script
 L'éxecution du script se fait en administrateur.

@@ -5,7 +5,7 @@ import datetime
 date_time = datetime.datetime.now()
 file_name = "Report of {}".format(date_time)
 print(file_name)
-file = open("data.txt", "w")
+file = open(file_name+".txt", "w")
 ''' start_address = input("Please enter the address without the bytes you want to iterate over with the last dot : ")
 if start_address[-1] != ".":
     start_address += "." '''
@@ -37,8 +37,15 @@ for ping in range(3, 7):
             # OS Detection
             osPacket = sr1(IP(dst=address, src=src_address)/TCP())
             if (osPacket.haslayer("IP")):
-                print("TTL: ", osPacket["IP"].ttl, "\n")
+                ttl = osPacket["IP"].ttl
+                if (ttl == 60):
+                    print("OS : MacOS\n")
+                elif (ttl == 64):
+                    print("OS : Linux\n")
+                elif (ttl == 128):
+                    print("OS : Window\n")
 
+            # Opened ports detection
             file.write("\nMain port states :\n")
             for dst_port in port_range:
                 os = ""
