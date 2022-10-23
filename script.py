@@ -12,7 +12,8 @@ if start_address[-1] != ".":
 start_address = '192.168.121.'
 #src_address = input("Please enter the source address (the address must be in the specified network) : ")
 input_range = input("Please enter a list of ports to test separated by space :")
-port_range  = input_range.split()
+str_range  = input_range.split()
+port_range = [int(i) for i in str_range]
 print(port_range)
 src_address = "192.168.121.4"
 
