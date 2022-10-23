@@ -12,7 +12,7 @@ file = open(file_name+".txt", "w")
 # start_address = input("Please enter the host address : ")
 ''' if start_address[-1] != ".":
     start_address += "." '''
-start_address = '192.168.121'
+start_address = '192.168.121.0'
 #src_address = input("Please enter the source address (the address must be in the specified network) : ")
 src_address = "192.168.121.4"
 
@@ -33,7 +33,7 @@ splitted = start_address.split(".")
 i = int(splitted[0])
 j = int(splitted[1])
 k = int(splitted[2])
-l = int(splitted[3])
+l = int(splitted[3]) +1
 
 for iteration in range(l, 1012*(1-(mask/32))+1):
     address = f"{i}.{j}.{k}.{l}"
