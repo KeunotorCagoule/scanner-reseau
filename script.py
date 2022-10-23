@@ -2,24 +2,43 @@ from scapy.all import IP, sr1, ICMP, ARP, Ether, srp, getmacbyip, TCP, sr
 import random
 import datetime
 
+# Log file
 date_time = datetime.datetime.now()
 file_name = "Report of {}".format(date_time)
 print(file_name)
 file = open(file_name+".txt", "w")
-''' start_address = input("Please enter the address without the bytes you want to iterate over with the last dot : ")
-if start_address[-1] != ".":
+
+# Dest address
+# start_address = input("Please enter the host address : ")
+''' if start_address[-1] != ".":
     start_address += "." '''
-start_address = '192.168.121.'
+start_address = '192.168.121'
 #src_address = input("Please enter the source address (the address must be in the specified network) : ")
+src_address = "192.168.121.4"
+
+# Dest network mask
+mask = 0
+while mask <= 0 or mask >= 32:
+    mask = int(
+        input("Please enter the remote newtork mask value (e.g 16 for X.X.X.X/16) : "))
+
+# Ports to test
 input_range = input(
-    "Please enter a list of ports to test separated by space :")
+    "Please enter a list of ports to test separated by space : ")
 str_range = input_range.split()
 port_range = [int(i) for i in str_range]
-src_address = "192.168.121.4"
-global os
 
-for ping in range(3, 7):
-    address = start_address + str(ping)
+# 4 parts of an IP (i.j.k.l)
+splitted = start_address.split(".")
+i = int(splitted[0])
+j = int(splitted[1])
+k = int(splitted[2])
+l = int(splitted[3])
+
+for iteration in range(l, 1012*(1-(mask/32))+1):
+    address = f"{i}.{j}.{k}.{l}"
+    print(address)
+
     if address != src_address:
         file.write("\n__________________________\n")
         file.write("Adresse IP : " + address + "\n")
@@ -39,11 +58,11 @@ for ping in range(3, 7):
             if (osPacket.haslayer("IP")):
                 ttl = osPacket["IP"].ttl
                 if (ttl == 60):
-                    print("OS : MacOS\n")
+                    file.write("OS : MacOS\n")
                 elif (ttl == 64):
-                    print("OS : Linux\n")
+                    file.write("OS : Linux\n")
                 elif (ttl == 128):
-                    print("OS : Window\n")
+                    file.write("OS : Windows\n")
 
             # Opened ports detection
             file.write("\nMain port states :\n")
@@ -82,18 +101,17 @@ for ping in range(3, 7):
                     ):
                         file.write(
                             f"\n{address}:{dst_port} is filtered (silently dropped).")
-                elif (dst_port == 22) and (res == "dropped"):
-                    os = "dropped"
-                    file.write(f"{address}'s is Linux.\n")
-                elif (dst_port == 22) and (res == "closed"):
-                    os = "closed"
-                    file.write(f"{address}'s OS is Windows\n")
-
         else:
             file.write("\nHost is down")
+    l += 1
+    if (l >= 253):
+        l = 0
+        k += 1
+    if (k >= 255):
+        k = 0
+        j += 1
+    if (j >= 255):
+        j = 0
+        i += 1
 
-
-# print(file.read())
 file.close()
-
-# if address == address src ne pas faire l'itération
