@@ -7,7 +7,9 @@ file_name = "Report of {}".format(date_time)
 print(file_name)
 file = open("data.txt", "w")
 start_address = input("Please enter the address without the bytes you want to iterate over : ")
+print(start_address)
 src_address = input("Please enter the source address (the address must be in the specified network) : ")
+print(src_address)
 #src_address = "192.168.121.4"
 
 
