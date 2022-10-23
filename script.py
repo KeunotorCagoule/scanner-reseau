@@ -6,15 +6,16 @@ date_time = datetime.datetime.now()
 file_name = "Report of {}".format(date_time)
 print(file_name)
 file = open("data.txt", "w")
-start_address = input("Please enter the address without the bytes you want to iterate over : ")
-print(start_address)
+start_address = input("Please enter the address without the bytes you want to iterate over with the last dot : ")
+if start_address[-1] != ".":
+    start_address += "."
 src_address = input("Please enter the source address (the address must be in the specified network) : ")
 print(src_address)
 #src_address = "192.168.121.4"
 
 
-''' def decode_binary_string(s):
-    return bytes(s).decode("ascii") '''
+def decode_binary_string(s):
+    return bytes(s).decode("ascii")
 
 
 for ping in range(3, 7):
