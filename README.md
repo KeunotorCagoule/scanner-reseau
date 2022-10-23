@@ -26,7 +26,7 @@ L'éxecution du script se fait en administrateur.
 Il faudra ouvrir le fichier pour changer l'adresse source ainsi que la partie fixe de l'adresse du réseau ainsi que les ports sur lesquels la machine regardera.
 
 
-## Lancer le script
+# Lancer le script
 Sous Windows, il faudra lancer un terminal en tant qu'administrateur et éxécuter la commande suivante : 
 ```bash
 py script.py

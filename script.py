@@ -17,7 +17,7 @@ for ping in range(3, 7):
     start_address = input("Please enter the address without the bytes you want to iterate over : ")
     src_address = input("Please enter the source address (the address must be in the specified network) : ")
     file.write("\n__________________________\n")
-    address =  + str(ping)
+    address = start_address + str(ping)
     if address == src_address:
         file.write("Adresse IP : " + str(address) + "\n")
         arp_request = ARP(pdst=address)
