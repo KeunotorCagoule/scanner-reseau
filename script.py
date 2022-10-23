@@ -36,7 +36,7 @@ for ping in range(3, 7):
             # OS Detection
             osPacket = sr1(IP(dst=address, src=src_address)/TCP())
             if (osPacket.haslayer("IP")):
-                osPacket.show()
+                print("TTL: ", osPacket["ttl"], "\n")
 
             file.write("\nMain port states :\n")
             for dst_port in port_range:
