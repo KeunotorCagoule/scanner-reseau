@@ -15,10 +15,9 @@ input_range = input("Please enter a list of ports to test separated by space :")
 str_range  = input_range.split()
 port_range = [int(i) for i in str_range]
 src_address = "192.168.121.4"
+global os
 
 for ping in range(3, 7):
-
-    
     address = start_address + str(ping)
     if address != src_address:
         file.write("\n__________________________\n")
@@ -33,12 +32,16 @@ for ping in range(3, 7):
         res = sr1(IP(dst=address, src=src_address)/ICMP(), timeout=5)
         if res:
             file.write("\nHost is up")
-            file.write("\nMain port states :\n")
 
+            # OS Detection
+            osPacket = sr1(IP(dst=address, src=src_address)/TCP())
+            if (osPacket.haslayer("IP")):
+                osPacket.show()
+
+            file.write("\nMain port states :\n")
             for dst_port in port_range:
-                res = ""
+                os = ""
                 src_port = random.randint(1025, 65534)
-                print(address, dst_port, src_port)
                 resp = sr1(
                     IP(dst=address)/TCP(sport=src_port, dport=dst_port, flags="S"), timeout=1,
                     verbose=0,
@@ -73,9 +76,12 @@ for ping in range(3, 7):
                         file.write(
                             f"\n{address}:{dst_port} is filtered (silently dropped).")
                 elif (dst_port == 22) and (res == "dropped"):
+                    os = "dropped"
                     file.write(f"{address}'s is Linux.\n")
                 elif (dst_port == 22) and (res == "closed"):
+                    os = "closed"
                     file.write(f"{address}'s OS is Windows\n")
+            
                 
         else:
             file.write("\nHost is down")
