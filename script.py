@@ -11,6 +11,7 @@ if start_address[-1] != ".":
     start_address += "."
 src_address = input("Please enter the source address (the address must be in the specified network) : ")
 input_range = input("Please enter a list of ports to test separated by space :")
+port_range  = input_range.split()
 print(input_range)
 #src_address = "192.168.121.4"
 
@@ -31,7 +32,6 @@ for ping in range(3, 7):
         res = sr1(IP(dst=address, src=src_address)/ICMP(), timeout=5)
         if res:
             file.write("\nHost is up")
-            port_range  = input_range.split()
             file.write("\nMain port states :\n")
 
             for dst_port in port_range:
