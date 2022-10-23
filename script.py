@@ -21,8 +21,8 @@ for ping in range(3, 7):
 
     file.write("\n__________________________\n")
     address = start_address + str(ping)
-    if address == src_address:
-        file.write("Adresse IP : " + str(address) + "\n")
+    if address != src_address:
+        file.write("Adresse IP : " + address + "\n")
         arp_request = ARP(pdst=address)
         #file.write(str(arp_request)+ "\n")
         broadcast = Ether(dst="ff:ff:ff:ff:ff:ff")
