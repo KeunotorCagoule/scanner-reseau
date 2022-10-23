@@ -13,8 +13,8 @@ print(src_address)
 #src_address = "192.168.121.4"
 
 
-def decode_binary_string(s):
-    return bytes(s).decode("ascii")
+''' def decode_binary_string(s):
+    return bytes(s).decode("ascii") '''
 
 
 for ping in range(3, 7):
