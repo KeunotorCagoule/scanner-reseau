@@ -6,14 +6,15 @@ date_time = datetime.datetime.now()
 file_name = "Report of {}".format(date_time)
 print(file_name)
 file = open("data.txt", "w")
-start_address = input("Please enter the address without the bytes you want to iterate over with the last dot : ")
+''' start_address = input("Please enter the address without the bytes you want to iterate over with the last dot : ")
 if start_address[-1] != ".":
-    start_address += "."
-src_address = input("Please enter the source address (the address must be in the specified network) : ")
+    start_address += "." '''
+start_address = '192.168.121.'
+#src_address = input("Please enter the source address (the address must be in the specified network) : ")
 input_range = input("Please enter a list of ports to test separated by space :")
 port_range  = input_range.split()
 print(input_range)
-#src_address = "192.168.121.4"
+src_address = "192.168.121.4"
 
 for ping in range(3, 7):
 
