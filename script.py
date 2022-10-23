@@ -13,11 +13,6 @@ src_address = input("Please enter the source address (the address must be in the
 print(src_address)
 #src_address = "192.168.121.4"
 
-
-def decode_binary_string(s):
-    return bytes(s).decode("ascii")
-
-
 for ping in range(3, 7):
 
     file.write("\n__________________________\n")
@@ -33,9 +28,6 @@ for ping in range(3, 7):
         mac = getmacbyip(address)
         file.write("Address MAC : " + str(mac))
         res = sr1(IP(dst=address, src=src_address)/ICMP(), timeout=5)
-        resFr = decode_binary_string(res)
-        print(resFr)
-        file.write("\n" + str(resFr))
         if res:
             file.write("\nHost is up")
             #port_range = [22, 23, 80, 443, 3389]
