@@ -35,7 +35,7 @@ j = int(splitted[1])
 k = int(splitted[2])
 l = int(splitted[3]) +1
 
-for iteration in range(l, 1012*(1-(mask/32))+1):
+for iteration in range(l, int(1018*(1-(mask/32))+1)):
     address = f"{i}.{j}.{k}.{l}"
     print(address)
 
