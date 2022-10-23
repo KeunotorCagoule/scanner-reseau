@@ -11,8 +11,9 @@ if start_address[-1] != ".":
     start_address += "." '''
 start_address = '192.168.121.'
 #src_address = input("Please enter the source address (the address must be in the specified network) : ")
-input_range = input("Please enter a list of ports to test separated by space :")
-str_range  = input_range.split()
+input_range = input(
+    "Please enter a list of ports to test separated by space :")
+str_range = input_range.split()
 port_range = [int(i) for i in str_range]
 src_address = "192.168.121.4"
 global os
@@ -36,7 +37,7 @@ for ping in range(3, 7):
             # OS Detection
             osPacket = sr1(IP(dst=address, src=src_address)/TCP())
             if (osPacket.haslayer("IP")):
-                print("TTL: ", osPacket["ttl"], "\n")
+                print("TTL: ", osPacket["IP"]["ttl"], "\n")
 
             file.write("\nMain port states :\n")
             for dst_port in port_range:
@@ -66,7 +67,6 @@ for ping in range(3, 7):
                     elif (resp.getlayer(TCP).flags == 0x14):
                         file.write(f"{address}:{dst_port} is closed.\n")
                         res = "closed"
-                        
 
                 elif(resp.haslayer(ICMP)):
                     if(
@@ -81,11 +81,9 @@ for ping in range(3, 7):
                 elif (dst_port == 22) and (res == "closed"):
                     os = "closed"
                     file.write(f"{address}'s OS is Windows\n")
-            
-                
+
         else:
             file.write("\nHost is down")
-
 
 
 # print(file.read())
